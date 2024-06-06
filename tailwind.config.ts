@@ -49,6 +49,9 @@ const config: Config = {
           periwinkle: '#CFCEF9',
           orchid: '#F9E0FD'
         }
+      },
+      boxShadow: {
+        quickbutton: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)'
       }
     }
   },

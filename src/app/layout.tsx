@@ -2,6 +2,8 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Lato } from 'next/font/google';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { DashboardLayout } from '@components/layouts';
+import { QuicksProvider } from '@context';
 import '@mantine/core/styles.css';
 import '@styles/globals.css';
 
@@ -22,7 +24,11 @@ const RootLayout: React.FC<{ children: React.ReactNode }> = ({
     </head>
     <body className={inter.className}>
       <MantineProvider>
-        {children}
+        <QuicksProvider>
+          <DashboardLayout>
+            {children}
+          </DashboardLayout>
+        </QuicksProvider>
       </MantineProvider>
     </body>
   </html>
