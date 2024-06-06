@@ -3,11 +3,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ActionIcon, Flex } from '@mantine/core';
-import { useQuicksContext } from '@hooks';
+import { CloseOutlined } from '@mui/icons-material';
+import { useQuicksContext } from '@/hooks';
 
 import TabItem from './TabItem';
 import { QUICK_TAB } from './utils';
-import { CloseOutlined } from '@mui/icons-material';
 
 const FloatingQuicks: React.FC = () => {
   const [isOpenTab, setIsOpenTab] = useState(false);

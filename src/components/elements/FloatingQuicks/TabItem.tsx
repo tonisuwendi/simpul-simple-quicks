@@ -1,8 +1,9 @@
 import React from 'react';
 import { ActionIcon, Flex, Text, Transition } from '@mantine/core';
-import { useQuicksContext } from '@hooks';
+import { useQuicksContext } from '@/hooks';
+import { type QUICK_TAB_ENUM } from '@/helpers/enum';
+
 import { type IQuickTab } from './utils';
-import { type QUICK_TAB_ENUM } from '@helpers/enum';
 
 type TabItemProps = IQuickTab & {
   isOpenTab: boolean
@@ -23,7 +24,7 @@ const TabItem: React.FC<TabItemProps> = ({ name, title, activeClass, inactiveCla
     <Transition key={name} mounted={isOpenTab} transition="fade-left" duration={200}>
       {(styles) => (
         <Flex gap={12} direction="column" align="center" style={styles}>
-          <Text className="text-primary-graphite font-bold">{title}</Text>
+          {(tabOpen == null) && <Text className="text-primary-graphite font-bold">{title}</Text>}
           <div className="relative">
             <ActionIcon
               variant="white"

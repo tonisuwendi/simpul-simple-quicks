@@ -1,4 +1,4 @@
-import { QUICK_TAB_ENUM } from '@helpers/enum';
+import { QUICK_TAB_ENUM } from '@/helpers/enum';
 import { ChromeReaderModeOutlined, QuestionAnswerOutlined } from '@mui/icons-material';
 
 export interface IQuickTab {

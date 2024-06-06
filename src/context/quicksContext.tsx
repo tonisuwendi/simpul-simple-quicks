@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useMemo, useState } from 'react';
-import { type QUICK_TAB_ENUM } from '@helpers/enum';
+import { type QUICK_TAB_ENUM } from '@/helpers/enum';
 
 export interface InitialState {
   tabOpen: QUICK_TAB_ENUM | null

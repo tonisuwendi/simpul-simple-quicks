@@ -2,10 +2,10 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Lato } from 'next/font/google';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import { DashboardLayout } from '@components/layouts';
-import { QuicksProvider } from '@context';
+import { DashboardLayout } from '@/components/layouts';
+import { QuicksProvider } from '@/context';
 import '@mantine/core/styles.css';
-import '@styles/globals.css';
+import '@/styles/globals.css';
 
 const inter = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
