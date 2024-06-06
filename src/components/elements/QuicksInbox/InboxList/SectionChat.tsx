@@ -2,12 +2,12 @@ import React from 'react';
 import { Flex, Text } from '@mantine/core';
 import { PersonOutline } from '@mui/icons-material';
 
-import { type IChatHistory } from './utils';
+import { type IListChatHistory } from '../utils';
 
-const SectionChat: React.FC<IChatHistory> = ({
+const SectionChat: React.FC<IListChatHistory> = ({
   title, date, currentSender, message, newMessageIndicator
 }) => (
-  <Flex justify="space-between" className="relative" gap={20}>
+  <Flex justify="space-between" className="relative cursor-pointer" gap={20}>
     <Flex gap={12}>
       <div className="relative w-[50px] shrink-0">
         <Flex align="center" justify="center" className="w-[34px] h-[34px] rounded-full bg-primary-blue absolute top-0 left-4">
