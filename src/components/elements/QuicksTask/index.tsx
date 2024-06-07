@@ -12,7 +12,9 @@ const QuicksTask: React.FC = () => {
 
   const handleAddNewTask = (): void => {
     setAddNewTask(true);
-    viewport.current?.scrollTo({ top: viewport.current?.scrollHeight, behavior: 'smooth' });
+    setTimeout(() => {
+      viewport.current?.scrollTo({ top: viewport.current?.scrollHeight, behavior: 'smooth' });
+    }, 10);
   };
 
   return (

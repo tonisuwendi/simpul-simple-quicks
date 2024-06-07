@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Divider } from '@mantine/core';
 
 import TaskItem from './TaskItem';
@@ -11,7 +11,8 @@ const DUMMY_TASKS: ITaskItem[] = [
     datetime: '6/4/2024, 09:29:26 AM',
     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
     isCompleted: true,
-    category: 'Personal Errands'
+    category: 'Personal Errands',
+    stickers: ['important-asap']
   },
   {
     id: '2',
@@ -19,7 +20,8 @@ const DUMMY_TASKS: ITaskItem[] = [
     datetime: '6/4/2024, 10:18:01 AM',
     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
     isCompleted: false,
-    category: 'Urgent To-Do'
+    category: 'Urgent To-Do',
+    stickers: ['offline-meeting', 'client-related']
   },
   {
     id: '3',
@@ -27,7 +29,8 @@ const DUMMY_TASKS: ITaskItem[] = [
     datetime: '6/4/2024, 11:29:26 AM',
     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
     isCompleted: true,
-    category: 'Urgent To-Do'
+    category: 'Urgent To-Do',
+    stickers: ['virtual-meeting']
   },
   {
     id: '4',
@@ -35,7 +38,8 @@ const DUMMY_TASKS: ITaskItem[] = [
     datetime: '6/4/2024, 12:29:26 PM',
     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
     isCompleted: false,
-    category: 'Personal Errands'
+    category: 'Personal Errands',
+    stickers: ['asap', 'self-task', 'appointments']
   },
   {
     id: '5',
@@ -43,7 +47,8 @@ const DUMMY_TASKS: ITaskItem[] = [
     datetime: '6/4/2024, 01:29:26 PM',
     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
     isCompleted: false,
-    category: 'Urgent To-Do'
+    category: 'Urgent To-Do',
+    stickers: ['court-related']
   }
 ];
 
@@ -66,7 +71,8 @@ const TaskList: React.FC<{
         datetime: '',
         description: '',
         isCompleted: false,
-        category: 'Personal Errands'
+        category: 'Personal Errands',
+        stickers: []
       }]);
     }
   }, [isAddNewTask]);
@@ -76,10 +82,10 @@ const TaskList: React.FC<{
       return <TaskItem key={task.id} {...task} />;
     }
     return (
-      <>
-        <TaskItem key={task.id} {...task} />
+      <Fragment key={task.id}>
+        <TaskItem {...task} />
         <Divider my={20} />
-      </>
+      </Fragment>
     );
   });
 };

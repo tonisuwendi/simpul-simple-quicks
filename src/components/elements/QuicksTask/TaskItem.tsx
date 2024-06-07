@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { ActionIcon, Checkbox, Collapse, Flex, Menu, Text, Textarea } from '@mantine/core';
-import { CalendarTodayOutlined, Edit, ExpandMore, MoreHoriz, Schedule } from '@mui/icons-material';
+import { ActionIcon, Checkbox, Collapse, Flex, Menu, Popover, Text, Textarea, UnstyledButton } from '@mantine/core';
+import { BookmarksOutlined, CalendarTodayOutlined, Edit, ExpandMore, MoreHoriz, Schedule } from '@mui/icons-material';
 import { DateInput } from '@mantine/dates';
 
 import InputText from '../InputText';
+import StickerLabel from '../StickerLabel';
+import { AVAILABLE_STICKERS } from './utils';
 
 moment.updateLocale('en', {
   relativeTime: {
@@ -33,7 +35,8 @@ const TaskItem: React.FC<{
   datetime: string
   description: string
   isCompleted: boolean
-}> = ({ title, datetime, description, isCompleted }) => {
+  stickers: string[]
+}> = ({ title, datetime, description, isCompleted, stickers }) => {
   const [isExpanded, setIsExpanded] = useState(!isCompleted);
   const [isEditDescription, setIsEditDescription] = useState(false);
 
@@ -92,6 +95,29 @@ const TaskItem: React.FC<{
             ) : (
               <Text className="text-sm text-[#4F4F4F]">{description === '' ? 'No Description' : description}</Text>
             )}
+          </Flex>
+          <Flex mt={16} gap={20} align="center" className="bg-[#F9F9F9] rounded-[5px] px-2 py-3">
+            <Popover withArrow arrowSize={16} width={270} classNames={{ dropdown: 'border border-primary-slate rounded-[5px]', arrow: 'border border-primary-slate' }}>
+              <Popover.Target>
+                <ActionIcon variant="transparent" className="shrink-0">
+                  <BookmarksOutlined className="text-primary-slate" />
+                </ActionIcon>
+              </Popover.Target>
+              <Popover.Dropdown p={16}>
+                <Flex direction="column" gap={12}>
+                  {AVAILABLE_STICKERS.map((sticker) => (
+                    <UnstyledButton key={sticker}>
+                      <StickerLabel variant={sticker} className={stickers.includes(sticker) ? 'border border-primary-blue' : ''} />
+                    </UnstyledButton>
+                  ))}
+                </Flex>
+              </Popover.Dropdown>
+            </Popover>
+            <Flex align="center" gap={10} wrap="wrap">
+              {stickers.map((sticker) => (
+                <StickerLabel key={sticker} variant={sticker} />
+              ))}
+            </Flex>
           </Flex>
         </Collapse>
       </div>
