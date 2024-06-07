@@ -8,7 +8,12 @@ const QuicksInbox: React.FC = () => {
 
   if (selectedInbox === null) return <InboxList onOpenDetail={setSelectedInbox} />;
 
-  return <InboxDetail onBack={() => { setSelectedInbox(null); }} />;
+  return (
+    <InboxDetail
+      inboxId={selectedInbox}
+      onBack={() => { setSelectedInbox(null); }}
+    />
+  );
 };
 
 export default QuicksInbox;

@@ -5,6 +5,7 @@ export interface IListChatHistory {
   currentSender?: string
   message: string
   newMessageIndicator: boolean
+  messageLists: IListChatItem[]
 }
 
 export interface IListChatItem {

@@ -21,6 +21,7 @@
         "indent": ["error", 2, { "SwitchCase": 1 }],
         "import/prefer-default-export": "off",
         "react/react-in-jsx-scope": "off",
-        "multiline-ternary": "off"
+        "multiline-ternary": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off"
     }
 }

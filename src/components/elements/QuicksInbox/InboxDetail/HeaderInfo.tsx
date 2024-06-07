@@ -1,11 +1,12 @@
 import React from 'react';
-import { ActionIcon, Divider, Flex, Text } from '@mantine/core';
+import { ActionIcon, Divider, Flex, Skeleton, Text } from '@mantine/core';
 import { ArrowBack, Close } from '@mui/icons-material';
 import { useQuicksContext } from '@/hooks';
 
 const HeaderInfo: React.FC<{
+  title: string
   onBack: () => void
-}> = ({ onBack }) => {
+}> = ({ title, onBack }) => {
   const { setTabOpen } = useQuicksContext();
 
   return (
@@ -16,7 +17,7 @@ const HeaderInfo: React.FC<{
             <ArrowBack />
           </ActionIcon>
           <div>
-            <Text className="font-bold text-primary-blue">I-589-AMRKHIL, Obaidullah [Affirmative Filling with ZHN]</Text>
+            {title ? <Text className="font-bold text-primary-blue">{title}</Text> : <Skeleton width={150} height={20} />}
             <Text className="text-xs mt-0.5">3 Participants</Text>
           </div>
         </Flex>
