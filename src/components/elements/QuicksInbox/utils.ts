@@ -13,4 +13,5 @@ export interface IListChatItem {
   message: string
   datetime: string
   isRead: boolean
+  replyMessage?: string
 }

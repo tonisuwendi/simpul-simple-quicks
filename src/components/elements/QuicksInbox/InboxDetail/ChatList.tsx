@@ -4,6 +4,7 @@ import { Divider, Flex, Text } from '@mantine/core';
 
 import ChatItem from './ChatItem';
 import { type IListChatItem } from '../utils';
+import { type IReplyMessage } from '.';
 
 const DUMMY_CHATS: IListChatItem[] = [
   {
@@ -39,7 +40,8 @@ const DUMMY_CHATS: IListChatItem[] = [
     name: 'You',
     message: 'Okay, i will buy it. How much is it?',
     datetime: '6/5/2024, 07:38:26 PM',
-    isRead: true
+    isRead: true,
+    replyMessage: 'Sure, i will explain it to you. The product that we sell is a product that is very good for your health. It is made from natural ingredients and has been tested by the health department. So, you don\'t need to worry about the quality of the product. Do you want to buy it?'
   },
   {
     id: '6',
@@ -81,11 +83,14 @@ const DUMMY_CHATS: IListChatItem[] = [
     name: 'Melani Shinta',
     message: 'Don\'t forget to buy our product again next time. Goodbye!',
     datetime: '6/6/2024, 11:44:26 PM',
-    isRead: false
+    isRead: false,
+    replyMessage: 'You\re welcome.'
   }
 ];
 
-const ChatList: React.FC = () => {
+const ChatList: React.FC<{
+  onReplyMessage: (replyMessage: IReplyMessage | null) => void
+}> = ({ onReplyMessage }) => {
   let isShowRead = false;
 
   return (
@@ -105,11 +110,11 @@ const ChatList: React.FC = () => {
                   <Text className={`font-bold text-sm px-4 ${isDifferentDate ? 'text-[#4F4F4F]' : 'text-indicator-crimson'}`}>{isDifferentDate ? moment(chat.datetime).format('MMMM D, YYYY') : 'New Message'}</Text>
                 }
               />
-              <ChatItem {...chat} />
+              <ChatItem {...chat} onReplyMessage={onReplyMessage} />
             </Fragment>
           );
         }
-        return <ChatItem key={chat.id} {...chat} />;
+        return <ChatItem key={chat.id} {...chat} onReplyMessage={onReplyMessage} />;
       })}
     </Flex>
   );
