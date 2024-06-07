@@ -40,7 +40,7 @@ const config: Config = {
             dark: '#43B78D'
           }
         },
-        stikers: {
+        stickers: {
           frost: '#E9F3FF',
           peach: '#FDCFA4',
           cream: '#F9E9C3',
@@ -49,6 +49,9 @@ const config: Config = {
           periwinkle: '#CFCEF9',
           orchid: '#F9E0FD'
         }
+      },
+      boxShadow: {
+        quickbutton: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)'
       }
     }
   },

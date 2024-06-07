@@ -1,0 +1,33 @@
+'use client';
+
+import React, { createContext, useMemo, useState } from 'react';
+import { type QUICK_TAB_ENUM } from '@/helpers/enum';
+
+export interface InitialState {
+  tabOpen: QUICK_TAB_ENUM | null
+  setTabOpen: (tab: QUICK_TAB_ENUM | null) => void
+};
+
+export const QuicksContext = createContext<InitialState>({
+  tabOpen: null,
+  setTabOpen: () => {}
+});
+
+const QuicksProvider: React.FC<{
+  children: React.ReactNode
+}> = ({ children }) => {
+  const [tabOpen, setTabOpen] = useState<QUICK_TAB_ENUM | null>(null);
+
+  const values = useMemo(() => ({
+    tabOpen,
+    setTabOpen
+  }), [tabOpen]);
+
+  return (
+    <QuicksContext.Provider value={values}>
+      {children}
+    </QuicksContext.Provider>
+  );
+};
+
+export default QuicksProvider;
