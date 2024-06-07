@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { Flex, Text } from '@mantine/core';
 import { PersonOutline } from '@mui/icons-material';
 
@@ -29,7 +30,7 @@ const SectionChat: React.FC<IListChatHistory> = ({
         <Text className="text-sm text-[#4F4F4F] line-clamp-1">{message}</Text>
       </Flex>
     </Flex>
-    <Text className="text-sm text-primary-slate shrink-0">{date}</Text>
+    <Text className="text-sm text-primary-slate shrink-0">{moment(date).format('MMMM DD, YYYY HH:mm')}</Text>
     {newMessageIndicator && <div className="w-3 h-3 rounded-full bg-indicator-crimson absolute right-0 top-1/2" />}
   </Flex>
 );

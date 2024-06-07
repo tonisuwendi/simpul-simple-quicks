@@ -8,7 +8,8 @@ import { type IReplyMessage } from '.';
 
 const ChatItem: React.FC<IListChatItem & {
   onReplyMessage: (replyMessage: IReplyMessage | null) => void
-}> = ({ name, message, datetime, replyMessage, onReplyMessage }) => {
+  onDeleteMessage: (id: string) => void
+}> = ({ id, name, message, datetime, replyMessage, onReplyMessage, onDeleteMessage }) => {
   const isMe = name === 'You';
   return (
     <Flex direction="column">
@@ -38,7 +39,7 @@ const ChatItem: React.FC<IListChatItem & {
                   Edit
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item color="red">
+                <Menu.Item color="red" onClick={() => { onDeleteMessage(id); }}>
                   Delete
                 </Menu.Item>
               </>
