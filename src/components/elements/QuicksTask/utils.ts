@@ -1,7 +1,7 @@
 export interface ITaskItem {
   id: string
   title: string
-  datetime: string
+  date: string
   description: string
   isCompleted: boolean
   category: string

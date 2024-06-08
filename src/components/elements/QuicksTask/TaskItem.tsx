@@ -2,43 +2,46 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import { ActionIcon, Checkbox, Collapse, Flex, Menu, Popover, Text, Textarea, UnstyledButton } from '@mantine/core';
 import { BookmarksOutlined, CalendarTodayOutlined, Edit, ExpandMore, MoreHoriz, Schedule } from '@mui/icons-material';
-import { DateInput } from '@mantine/dates';
+import { DateInput, type DateValue } from '@mantine/dates';
+import { convertTaskDate } from '@/helpers/utils';
+import { useQuicksContext } from '@/hooks';
 
 import InputText from '../InputText';
 import StickerLabel from '../StickerLabel';
 import { AVAILABLE_STICKERS } from './utils';
 
-moment.updateLocale('en', {
-  relativeTime: {
-    future: '%s Left',
-    past: '%s Ago',
-    s: function (number, withoutSuffix, key, isFuture) {
-      return '00:' + (number < 10 ? '0' : '') + number + ' minutes';
-    },
-    m: '01:00 minutes',
-    mm: function (number, withoutSuffix, key, isFuture) {
-      return (number < 10 ? '0' : '') + number + ':00' + ' minutes';
-    },
-    h: '1 Hour',
-    hh: '%d Hours',
-    d: '1 Day',
-    dd: '%d Days',
-    M: '1 Month',
-    MM: '%d Months',
-    y: '1 Year',
-    yy: '%d Years'
-  }
-});
-
 const TaskItem: React.FC<{
+  id: string
   title: string
-  datetime: string
+  date: string
   description: string
   isCompleted: boolean
   stickers: string[]
-}> = ({ title, datetime, description, isCompleted, stickers }) => {
+  onChangeValue: (id: string, field: string, value: string | boolean | string[]) => void
+  onDelete: (id: string) => void
+}> = ({ id, title, date, description, isCompleted, stickers, onChangeValue, onDelete }) => {
   const [isExpanded, setIsExpanded] = useState(!isCompleted);
   const [isEditDescription, setIsEditDescription] = useState(false);
+
+  const { setIsAddNewTask } = useQuicksContext();
+
+  const handleChangeCompleted = (event: React.FormEvent<HTMLInputElement>): void => {
+    const { checked } = event.currentTarget;
+    onChangeValue(id, 'isCompleted', checked);
+    setIsExpanded(!checked);
+  };
+
+  const handleChangeStickers = (sticker: string): void => {
+    const newStickers = stickers.includes(sticker)
+      ? stickers.filter((item) => item !== sticker)
+      : [...stickers, sticker];
+    onChangeValue(id, 'stickers', newStickers);
+  };
+
+  const handleChangeTitle = (event: React.FormEvent<HTMLInputElement>): void => {
+    onChangeValue(id, 'title', event.currentTarget.value);
+    setIsAddNewTask(false);
+  };
 
   return (
     <Flex gap={16}>
@@ -47,20 +50,25 @@ const TaskItem: React.FC<{
         color="#828282"
         className={`shrink-0 ${title === '' ? 'mt-2.5' : 'mt-0.5'}`}
         checked={isCompleted}
+        onChange={handleChangeCompleted}
       />
       <div className="w-full">
         <Flex align="flex-start" justify="space-between" gap={8}>
           {title === '' ? (
-            <InputText placeholder="Type Task Title" w={300} />
+            <InputText
+              placeholder="Type Task Title"
+              w={300}
+              onBlur={handleChangeTitle}
+            />
           ) : (
             <Text className={`font-bold ${isCompleted ? 'text-primary-slate line-through' : 'text-[#4F4F4F]'}`}>{title}</Text>
           )}
-          {datetime !== '' && (
+          {date !== '' && (
             <Flex align="center" gap={12} className={`shrink-0 ${title === '' ? 'mt-2.5' : 'mt-0.5'}`}>
               {!isCompleted && (
-                <Text className="text-sm text-indicator-crimson">{moment(datetime).fromNow()}</Text>
+                <Text className="text-sm text-indicator-crimson">{convertTaskDate(date)}</Text>
               )}
-              <Text className="text-sm text-[#4F4F4F]">{moment(datetime).format('DD/MM/YYYY')}</Text>
+              <Text className="text-sm text-[#4F4F4F]">{moment(date).format('DD/MM/YYYY')}</Text>
             </Flex>
           )}
         </Flex>
@@ -74,7 +82,8 @@ const TaskItem: React.FC<{
               classNames={{
                 input: 'h-10 rounded-[5px] border border-primary-slate'
               }}
-              value={datetime === '' ? undefined : new Date(datetime)}
+              value={date === '' ? undefined : new Date(date)}
+              onChange={(value: DateValue) => { onChangeValue(id, 'date', value ? moment(value).format('YYYY-MM-DD') : ''); }}
             />
           </Flex>
           <Flex mt={16} gap={16}>
@@ -87,6 +96,7 @@ const TaskItem: React.FC<{
                 autosize
                 value={description}
                 className="w-full"
+                onChange={(event: React.FormEvent<HTMLTextAreaElement>) => { onChangeValue(id, 'description', event.currentTarget.value); }}
                 onBlur={() => { setIsEditDescription(false); }}
                 classNames={{
                   input: 'border border-primary-slate rounded-[5px]'
@@ -106,7 +116,7 @@ const TaskItem: React.FC<{
               <Popover.Dropdown p={16}>
                 <Flex direction="column" gap={12}>
                   {AVAILABLE_STICKERS.map((sticker) => (
-                    <UnstyledButton key={sticker}>
+                    <UnstyledButton key={sticker} onClick={() => { handleChangeStickers(sticker); }}>
                       <StickerLabel variant={sticker} className={stickers.includes(sticker) ? 'border border-primary-blue' : ''} />
                     </UnstyledButton>
                   ))}
@@ -132,7 +142,7 @@ const TaskItem: React.FC<{
             </ActionIcon>
           </Menu.Target>
           <Menu.Dropdown w={130} className="border border-primary-silver">
-            <Menu.Item color="red">
+            <Menu.Item color="red" onClick={() => { onDelete(id); }}>
               Delete
             </Menu.Item>
           </Menu.Dropdown>
