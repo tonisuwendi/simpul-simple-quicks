@@ -17,10 +17,6 @@ This repository contains the frontend codebase for a Quicks Chat and Task app la
 - **Task Management**: Supports efficient task management with the ability to add, edit, and delete tasks seamlessly. Moreover, it includes an integrated sticker feature to enhance task visualization and user engagement.
 - **Local Storage**: Utilizes local storage for data persistence, ensuring user data remains intact even after browser sessions.
 
-## API Documentation
-
-For detailed documentation of the API endpoints and usage, refer to the [API Documentation](https://geosains-docs.apidog.io/).
-
 ## Demo URL
 
 The application is accessible at: [https://simple-quicks-tonsu.netlify.app](https://simple-quicks-tonsu.netlify.app/)
