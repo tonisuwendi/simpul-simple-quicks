@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <br>
+  <a href="https://simple-quicks-tonsu.netlify.app/favicon.svg"><img src="https://simple-quicks-tonsu.netlify.app/favicon.svg" alt="logo" width="200"></a>
+  <br>
+  <h1>Simple Quicks</h1>
+  <br>
+</div>
 
-## Getting Started
+# Simpul Tech - Skill Challenge
+> Frontend codebase for a Messaging and To Do List app
 
-First, run the development server:
+This repository contains the frontend codebase for a Quicks Chat and Task app layouted with Next.js, TypeScript, Mantine, and Tailwind CSS. The application prioritizes elegant and professional design while providing robust functionality for both inbox messaging and task management.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Key Features:
+- **Elegant Design**: Offers a visually appealing and professional layout for seamless user experience.
+- **Inbox Feature**: Provides a well-designed inbox with comprehensive functionality, including chat reply and deletion capabilities.
+- **Task Management**: Supports efficient task management with the ability to add, edit, and delete tasks seamlessly. Moreover, it includes an integrated sticker feature to enhance task visualization and user engagement.
+- **Local Storage**: Utilizes local storage for data persistence, ensuring user data remains intact even after browser sessions.
+
+## API Documentation
+
+For detailed documentation of the API endpoints and usage, refer to the [API Documentation](https://geosains-docs.apidog.io/).
+
+## Demo URL
+
+The application is accessible at: [https://simple-quicks-tonsu.netlify.app](https://simple-quicks-tonsu.netlify.app/)
+
+## Technologies Used
+- **Next.js**: Next.js serves as the primary framework for building the frontend of the application, providing server-side rendering and other powerful features.
+- **TypeScript**: TypeScript is used for static typing, enabling enhanced code quality and developer productivity.
+- **Mantine**: Mantine is utilized for UI components and utilities, offering a modern and accessible design system for building sleek interfaces.
+- **Tailwind CSS**: Tailwind CSS is used for styling the application, offering a utility-first approach for rapid development and customization.
+
+## Installation
+
+To get started with the project, follow these steps:
+
+- Clone the repository:
+
+```sh
+git clone git@github.com:tonisuwendi/simpul-simple-quicks.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Navigate to the project directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+cd simpul-simple-quicks
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Install dependencies:
 
-## Learn More
+```sh
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+- Set up environment variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Duplicate the .env.example file and rename it to .env. Update the necessary environment variables such as crypto secret key.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Start the server:
 
-## Deploy on Vercel
+```sh
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Developer
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 👨‍💻 **Toni Suwendi** - [@tonisuwendi](https://github.com/tonisuwendi)
+
