@@ -1,74 +1,34 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Divider } from '@mantine/core';
+import Image from 'next/image';
+import { Divider, Flex, Text } from '@mantine/core';
+import { getLocalStorage, setLocalStorage } from '@/helpers/storage';
+import { STORAGE_ENUM } from '@/helpers/enum';
+import { useQuicksContext } from '@/hooks';
 
 import TaskItem from './TaskItem';
 import { type ITaskItem } from './utils';
 
-const DUMMY_TASKS: ITaskItem[] = [
-  {
-    id: '1',
-    title: 'Close off Case #012920 - RODRIGUES, Amiguel',
-    datetime: '6/4/2024, 09:29:26 AM',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
-    isCompleted: true,
-    category: 'Personal Errands',
-    stickers: ['important-asap']
-  },
-  {
-    id: '2',
-    title: 'Set up documentation report for several Cases: Case 145443, Case 145444, and Case 145445',
-    datetime: '6/4/2024, 10:18:01 AM',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
-    isCompleted: false,
-    category: 'Urgent To-Do',
-    stickers: ['offline-meeting', 'client-related']
-  },
-  {
-    id: '3',
-    title: 'Prepare for the upcoming meeting with the Board of Directors',
-    datetime: '6/4/2024, 11:29:26 AM',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
-    isCompleted: true,
-    category: 'Urgent To-Do',
-    stickers: ['virtual-meeting']
-  },
-  {
-    id: '4',
-    title: 'Review the latest financial report and make necessary adjustments',
-    datetime: '6/4/2024, 12:29:26 PM',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
-    isCompleted: false,
-    category: 'Personal Errands',
-    stickers: ['asap', 'self-task', 'appointments']
-  },
-  {
-    id: '5',
-    title: 'Prepare for the upcoming meeting with the Board of Directors',
-    datetime: '6/4/2024, 01:29:26 PM',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.',
-    isCompleted: false,
-    category: 'Urgent To-Do',
-    stickers: ['court-related']
-  }
-];
-
 const TaskList: React.FC<{
   filterValue: string
-  isAddNewTask: boolean
-}> = ({ filterValue, isAddNewTask }) => {
-  const [taskList, setTaskList] = useState<ITaskItem[]>(DUMMY_TASKS);
+}> = ({ filterValue }) => {
+  const taskStorage = getLocalStorage(STORAGE_ENUM.TASK) || '[]';
+  const taskStorageParsed: ITaskItem[] = JSON.parse(taskStorage);
+
+  const [taskList, setTaskList] = useState<ITaskItem[]>(taskStorageParsed);
+
+  const { isAddNewTask } = useQuicksContext();
 
   useEffect(() => {
-    const newTasks = filterValue === 'My Tasks' ? DUMMY_TASKS : DUMMY_TASKS.filter((task) => task.category === filterValue);
+    const newTasks = filterValue === 'My Tasks' ? taskStorageParsed : taskStorageParsed.filter((task) => task.category === filterValue);
     setTaskList(newTasks);
   }, [filterValue]);
 
   useEffect(() => {
     if (isAddNewTask) {
       setTaskList((tasks) => [...tasks, {
-        id: '6',
+        id: `task-${tasks.length + 1}`,
         title: '',
-        datetime: '',
+        date: '',
         description: '',
         isCompleted: false,
         category: 'Personal Errands',
@@ -77,13 +37,52 @@ const TaskList: React.FC<{
     }
   }, [isAddNewTask]);
 
+  const handleChangeValue = (id: string, field: string, value: string | boolean | string[]): void => {
+    const newTasks = taskList.map((task) => {
+      if (task.id === id) {
+        return { ...task, [field]: value };
+      }
+      return task;
+    });
+    setTaskList(newTasks);
+    setLocalStorage(STORAGE_ENUM.TASK, JSON.stringify(newTasks));
+  };
+
+  const handleDeleteTask = (id: string): void => {
+    const newTasks = taskList.filter((task) => task.id !== id);
+    setTaskList(newTasks);
+    setLocalStorage(STORAGE_ENUM.TASK, JSON.stringify(newTasks));
+  };
+
+  if (taskList.length === 0) {
+    return (
+      <Flex align="center" direction="column" gap={12} className="text-center text-[#828282] mt-5">
+        <Image src="/img/no-task.png" alt="Empty Task" width={500} height={500} className="w-[150px]" />
+        <Text className="font-bold text-[#4F4F4F]">
+          No task found. Please add a new task.
+        </Text>
+      </Flex>
+    );
+  }
+
   return taskList.map((task, index) => {
     if (index === taskList.length - 1) {
-      return <TaskItem key={task.id} {...task} />;
+      return (
+        <TaskItem
+          key={task.id}
+          {...task}
+          onChangeValue={handleChangeValue}
+          onDelete={handleDeleteTask}
+        />
+      );
     }
     return (
       <Fragment key={task.id}>
-        <TaskItem {...task} />
+        <TaskItem
+          {...task}
+          onChangeValue={handleChangeValue}
+          onDelete={handleDeleteTask}
+        />
         <Divider my={20} />
       </Fragment>
     );

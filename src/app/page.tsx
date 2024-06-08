@@ -7,6 +7,7 @@ import { STORAGE_ENUM } from '@/helpers/enum';
 const Home: React.FC = () => {
   const handleClearData = (): void => {
     localStorage.removeItem(STORAGE_ENUM.INBOX);
+    localStorage.removeItem(STORAGE_ENUM.TASK);
     window.location.reload();
   };
 

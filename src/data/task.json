@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "title": "Close off Case #012920 - RODRIGUES, Amiguel",
+    "date": "2024-06-10",
+    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.",
+    "isCompleted": true,
+    "category": "Personal Errands",
+    "stickers": ["important-asap"]
+  },
+  {
+    "id": "2",
+    "title": "Set up documentation report for several Cases: Case 145443, Case 145444, and Case 145445",
+    "date": "2024-06-11",
+    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.",
+    "isCompleted": false,
+    "category": "Urgent To-Do",
+    "stickers": ["offline-meeting", "client-related"]
+  },
+  {
+    "id": "3",
+    "title": "Prepare for the upcoming meeting with the Board of Directors",
+    "date": "2024-06-13",
+    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.",
+    "isCompleted": true,
+    "category": "Urgent To-Do",
+    "stickers": ["virtual-meeting"]
+  },
+  {
+    "id": "4",
+    "title": "Review the latest financial report and make necessary adjustments",
+    "date": "2024-06-11",
+    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.",
+    "isCompleted": false,
+    "category": "Personal Errands",
+    "stickers": ["asap", "self-task", "appointments"]
+  },
+  {
+    "id": "5",
+    "title": "Prepare for the upcoming meeting with the Board of Directors",
+    "date": "2024-06-12",
+    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non itaque optio delectus, beatae tempore consectetur autem, odit odio voluptatibus repellendus incidunt nam amet ipsum fugiat et animi rerum quae omnis.",
+    "isCompleted": false,
+    "category": "Urgent To-Do",
+    "stickers": ["court-related"]
+  }
+]

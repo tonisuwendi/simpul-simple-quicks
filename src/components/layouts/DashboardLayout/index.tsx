@@ -8,6 +8,7 @@ import { useQuicksContext } from '@/hooks';
 import SideBar from './SideBar';
 import Navbar from './Navbar';
 import inboxJson from '@/data/inbox.json';
+import taskJson from '@/data/task.json';
 import { getLocalStorage, setLocalStorage } from '@/helpers/storage';
 import { STORAGE_ENUM } from '@/helpers/enum';
 
@@ -16,9 +17,9 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
   useEffect(() => {
     const inboxStorage = getLocalStorage(STORAGE_ENUM.INBOX) || null;
-    if (!inboxStorage) {
-      setLocalStorage(STORAGE_ENUM.INBOX, JSON.stringify(inboxJson));
-    }
+    const taskStorage = getLocalStorage(STORAGE_ENUM.TASK) || null;
+    if (!inboxStorage) setLocalStorage(STORAGE_ENUM.INBOX, JSON.stringify(inboxJson));
+    if (!taskStorage) setLocalStorage(STORAGE_ENUM.TASK, JSON.stringify(taskJson));
   }, []);
 
   return (
