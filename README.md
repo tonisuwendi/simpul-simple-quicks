@@ -11,7 +11,7 @@
 
 This repository contains the frontend codebase for a Quicks Chat and Task app layouted with Next.js, TypeScript, Mantine, and Tailwind CSS. The application prioritizes elegant and professional design while providing robust functionality for both inbox messaging and task management.
 
-## Key Features:
+## Key Features
 - **Elegant Design**: Offers a visually appealing and professional layout for seamless user experience.
 - **Inbox Feature**: Provides a well-designed inbox with comprehensive functionality, including chat reply and deletion capabilities.
 - **Task Management**: Supports efficient task management with the ability to add, edit, and delete tasks seamlessly. Moreover, it includes an integrated sticker feature to enhance task visualization and user engagement.
